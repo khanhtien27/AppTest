@@ -1,0 +1,26 @@
+﻿@model  AppTest.Models.Employee
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="ChangeAvatar">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <h3>Old Avatar</h3>
+            <div class="form-group">
+                
+                <img src="~/Img/@Model.Img" alt="Avatar" width="100" height="100">
+                <span asp-validation-for="Img" class="text-danger"></span>
+            </div>
+            <br />
+            <h3>Choose new Avater</h3>
+            <div class="form-group">
+                <input asp-for="Img" class="form-control" type="file"/>
+                <span asp-validation-for="Img" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
