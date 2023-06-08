@@ -25,6 +25,7 @@ namespace AppTest.Controllers
               return _context.Department != null ? 
                           View(await _context.Department.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Department'  is null.");
+            
         }
 
         // GET: Departments/Details/5
