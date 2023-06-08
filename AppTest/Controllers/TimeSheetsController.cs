@@ -91,8 +91,10 @@ namespace AppTest.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,IdEmployment,Start,BreakStart,BreakEnd,End")] TimeSheet timeSheet)
+        public async Task<IActionResult> Edit(int id, TimeSheet timeSheet)
         {
+
+
             if (id != timeSheet.Id)
             {
                 return NotFound();

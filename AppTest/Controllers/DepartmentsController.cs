@@ -15,7 +15,7 @@ namespace AppTest.Controllers
         private readonly ApplicationDbContext _context;
 
         public DepartmentsController(ApplicationDbContext context)
-        {
+        {       
             _context = context;
         }
 
