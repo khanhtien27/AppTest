@@ -22,6 +22,7 @@ namespace AppTest.Controllers
         // GET: TimeSheets
         public async Task<IActionResult> Index(string? Id)
         {
+            TimeSpan total = new TimeSpan();
             if(Id == null)
             {
                 var applicationDbContext = _context.TimeSheet.Include(t => t.employee);
@@ -29,8 +30,22 @@ namespace AppTest.Controllers
             }
             else
             {
-                var applicationDbContext = _context.TimeSheet.Where(t => t.IdEmployment == Id).Include(t => t.employee);
-                return View(await applicationDbContext.ToListAsync());
+                var applicationDbContext = await _context.TimeSheet.Where(t => t.IdEmployment == Id).Include(t => t.employee).ToListAsync();
+                for (int i = 0; i < applicationDbContext.Count(); i++)
+                {
+                    var item = applicationDbContext[i];
+                    if(item.BreakStart == null)
+                    {
+                        total += (TimeSpan)(item.End - item.Start);
+                    }
+                    else
+                    {
+                        total += (TimeSpan)(item.End - item.Start) - (TimeSpan)(item.BreakEnd - item.BreakStart);
+                    }                 
+                }
+                var timeover = total.TotalMinutes / 60;
+                ViewBag.Total = timeover.ToString("##0.##");
+                return View(applicationDbContext);
             }
           
         }
