@@ -20,10 +20,19 @@ namespace AppTest.Controllers
         }
 
         // GET: TimeSheets
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? Id)
         {
-            var applicationDbContext = _context.TimeSheet.Include(t => t.employee);
-            return View(await applicationDbContext.ToListAsync());
+            if(Id == null)
+            {
+                var applicationDbContext = _context.TimeSheet.Include(t => t.employee);
+                return View(await applicationDbContext.ToListAsync());
+            }
+            else
+            {
+                var applicationDbContext = _context.TimeSheet.Where(t => t.IdEmployment == Id).Include(t => t.employee);
+                return View(await applicationDbContext.ToListAsync());
+            }
+          
         }
 
         // GET: TimeSheets/Details/5
@@ -48,7 +57,7 @@ namespace AppTest.Controllers
         // GET: TimeSheets/Create
         public IActionResult Create()
         {
-            ViewData["IdEmployment"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["IdEmployment"] = new SelectList(_context.Users, "Id", "FirstName");
             return View();
         }
 
@@ -82,7 +91,7 @@ namespace AppTest.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdEmployment"] = new SelectList(_context.Users, "Id", "Id", timeSheet.IdEmployment);
+            ViewData["IdEmployment"] = new SelectList(_context.Users, "Id", "FirstName", timeSheet.IdEmployment);
             return View(timeSheet);
         }
 

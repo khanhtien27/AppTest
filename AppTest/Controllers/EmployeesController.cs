@@ -74,14 +74,30 @@ namespace AppTest.Controllers
 
         public async Task<IActionResult> TimeSheetByMonth (int? Month)
         {
-            
-            var model = await _context.TimeSheet.Where(t => t.Start.Month == Month).ToListAsync();
-            if(model == null)
+            if(Month != null)
             {
-                return NotFound();
+                
+                var model= await _context.TimeSheet.Where(t => t.Start.Month == Month).Include(e => e.employee).AsNoTracking().ToListAsync(); 
+                if (model == null)
+                {
+                    return NotFound();
+                }
+                return View(model);
             }
-            return View(model);
+            else
+            {
+                var model = await _context.TimeSheet.Include(e => e.employee).AsNoTracking().ToListAsync();
+                if (model == null)
+                {
+                    return NotFound();
+                }
+                return View(model);
+            }
+            
         }
+
+
+        
 
     }
 }

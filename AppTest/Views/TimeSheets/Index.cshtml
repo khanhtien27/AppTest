@@ -26,6 +26,7 @@
                     <th scope="col" style="width:150px;" class="text-center">Time BreakStart</th>
                     <th scope="col" style="width:200px;" class="text-center">Time BreakEnd</th>
                     <th scope="col" style="width:300px;" class="text-center">Time end</th>
+                    <th scope="col" style="width:300px;" class="text-center">total</th>
                     <th scope="col" class="text-center"></th>
                 </tr>
             </thead>
@@ -33,11 +34,22 @@
             <tbody>
                 @foreach (var item in Model)
                 {
+                    int c1, c2;
+                    if(item.BreakStart == null)
+                    {
+                        c1 = ((item.End.Hour * 60 + item.End.Minute) - (item.Start.Hour * 60 + item.Start.Minute));
+                        c2 = 0;
+                    }
+                    else
+                    {
+                        c1 = ((item.End.Hour * 60 + item.End.Minute) - (item.BreakEnd.Value.Hour * 60 + item.BreakEnd.Value.Minute));
+                        c2 = ((item.BreakStart.Value.Hour * 60 + item.BreakStart.Value.Minute) - (item.Start.Hour * 60 + item.Start.Minute));
+                    }
                     <tr>
-                        <th scope="row" class="text-center align-middle">#</th>
+                        <th scope="row" class="text-center align-middle">@item.employee.FirstName @item.employee.LastName</th>
                         <td class="text-center align-middle">@item.Start.Day / @item.Start.Month</td>
                         <td class="text-center align-middle">@item.Start.TimeOfDay</td>
-                        @if(item.BreakStart != null)
+                        @if (item.BreakStart != null)
                         {
                             <td class="text-center align-middle">@item.BreakStart.Value.TimeOfDay</td>
                             <td class="text-center align-middle">@item.BreakEnd.Value.TimeOfDay</td>
@@ -48,6 +60,9 @@
                             <td class="text-center align-middle"></td>
                         }
                         <td class="text-center align-middle">@item.End.TimeOfDay</td>
+                        <td class="text-center align-middle">
+                            @((c1 + c2) / 60) hours  @((c1 + c2) % 60) Mintes
+                        </td>
                         <td class="text-center align-middle">
                             <a asp-controller="TimeSheets" asp-action="Edit" asp-route-Id="@item.Id" class="btn btn-outline-warning"><i class="bi bi-box-arrow-in-up"></i>Edit TimeSheets</a>
                             <a asp-controller="TimeSheets" asp-action="Delete" asp-route-Id="@item.Id" class="btn btn-outline-danger"><i class="bi bi-box-arrow-in-up"></i>Delete TimeSheets</a>
