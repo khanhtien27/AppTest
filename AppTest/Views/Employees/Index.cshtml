@@ -37,6 +37,7 @@
                         <td class="text-center align-middle">
                             <a asp-controller="TimeSheets" asp-action="Index" asp-route-Id="@item.Id" class="btn btn-outline-warning"><i class="bi bi-box-arrow-in-up"></i>TimeSheet</a>
                             <a asp-controller="Employees" asp-action="ChangeAvatar" asp-route-Id="@item.Id" class="btn btn-outline-info"><i class="bi bi-box-arrow-in-up"></i>Change Avatar</a>
+                            <a asp-controller="Employees" asp-action="Infor" asp-route-Id="@item.Id" class="btn btn-outline-success"><i class="bi bi-box-arrow-in-up"></i>Detail information</a>
                         </td>
                     </tr>
                 }

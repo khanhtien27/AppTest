@@ -1,18 +1,21 @@
 ﻿@model IEnumerable<AppTest.Models.TimeSheet>
-
+<h3>Person is the best of month: <i>@ViewBag.Employee</i> with @ViewBag.Max hours/Month</h3>
 <div class="card">
     <div class="card-header">
         <form asp-controller="Employees" asp-action="TimeSheetByMonth" method="get">
             <div class="row">
                 <div class="col-md-12 text-end">
                     <div class="form-group">
-                    </div>
-                    <div class="form-group">
                         Month: <input type="text" name="Month" />
                         <input type="submit" value="Search" class="btn btn-primary" />
                     </div>
+                    <div class="form-group">
+                        <a asp-controller="Employees" asp-action="CalculateSalary" asp-route-Month="0" class="btn btn-outline-info m-2  "><i class="bi bi-box-arrow-in-up"></i>Salary</a>
+                    </div>
                 </div>
             </div>
+            
+            
         </form>
     </div>
     @{
@@ -23,14 +26,14 @@
             int c1, c2;
             if (item.BreakStart == null)
             {
-                c1 = ((item.End.Hour * 60 + item.End.Minute) - (item.Start.Hour * 60 + item.Start.Minute));
+                c1 = Math.Abs(((item.End.Hour * 60 + item.End.Minute) - (item.Start.Hour * 60 + item.Start.Minute)));
                 c2 = 0;
                 max = c1;
             }
             else
             {
-                c1 = ((item.End.Hour * 60 + item.End.Minute) - (item.BreakEnd.Value.Hour * 60 + item.BreakEnd.Value.Minute));
-                c2 = ((item.BreakStart.Value.Hour * 60 + item.BreakStart.Value.Minute) - (item.Start.Hour * 60 + item.Start.Minute));
+                c1 = Math.Abs(((item.End.Hour * 60 + item.End.Minute) - (item.BreakEnd.Value.Hour * 60 + item.BreakEnd.Value.Minute)));
+                c2 = Math.Abs(((item.BreakStart.Value.Hour * 60 + item.BreakStart.Value.Minute) - (item.Start.Hour * 60 + item.Start.Minute)));
                 max = c2 + c1;
             }
             if (hightest == null)
@@ -60,6 +63,21 @@
                     <th scope="col" style="width:300px;" class="text-center">total</th>
                     <th scope="col" class="text-center"></th>
                 </tr>
+
+                <tr>
+                    @{
+                        var a = hightest.FirstOrDefault().Key;
+                        var b = hightest.FirstOrDefault().Value;
+                    }
+                    <th scope="col" style="width:150px;" class="text-center">@a.employee.FirstName @a.employee.LastName</th>
+                    <th scope="col" style="width:150px;" class="text-center"></th>
+                    <th scope="col" style="width:200px;" class="text-center"></th>
+                    <th scope="col" style="width:150px;" class="text-center"></th>
+                    <th scope="col" style="width:200px;" class="text-center"></th>
+                    <th scope="col" style="width:300px;" class="text-center"></th>
+                    <th scope="col" style="width:300px;" class="text-center">@b</th>
+                    <th scope="col" class="text-center"></th>
+                </tr>
             </thead>
 
             <tbody>
@@ -68,14 +86,14 @@
                     int c1, c2;
                     if (item.BreakStart == null)
                     {
-                        c1 = ((item.End.Hour * 60 + item.End.Minute) - (item.Start.Hour * 60 + item.Start.Minute));
+                        c1 = Math.Abs(((item.End.Hour * 60 + item.End.Minute) - (item.Start.Hour * 60 + item.Start.Minute)));
                         c2 = 0;
                         max = c1;
                     }
                     else
                     {
-                        c1 = ((item.End.Hour * 60 + item.End.Minute) - (item.BreakEnd.Value.Hour * 60 + item.BreakEnd.Value.Minute));
-                        c2 = ((item.BreakStart.Value.Hour * 60 + item.BreakStart.Value.Minute) - (item.Start.Hour * 60 + item.Start.Minute));
+                        c1 = Math.Abs(((item.End.Hour * 60 + item.End.Minute) - (item.BreakEnd.Value.Hour * 60 + item.BreakEnd.Value.Minute)));
+                        c2 = Math.Abs(((item.BreakStart.Value.Hour * 60 + item.BreakStart.Value.Minute) - (item.Start.Hour * 60 + item.Start.Minute)));
                         max = c2 + c1;
                     }
                     <tr>
