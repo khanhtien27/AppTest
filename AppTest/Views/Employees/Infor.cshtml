@@ -5,30 +5,81 @@
 <div class="card">
     <div class="card-header">
         <div class="row">
-            <div class="col-md-12 text-end">
+            <div class="col-md-6">
                 <img src="~/Img/@Model.Img" alt="Avatar" width="100" height="100">
             </div>
         </div>
     </div>
 
     <div class="card-body p-3">
-        <div class="col-2 pt-3">
-            <label asp-for="FirstName" class="control-label pt-2" style="font-size:20px;"></label>
-        </div>
-        <div class="col-10 pt-3">
-            <input asp-for="FirstName" class="form-control" disabled />
-        </div>
+        <div class="row">
+            <div class="col-2 pt-3">
+                <label asp-for="FirstName" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pt-3">
+                <input asp-for="FirstName" class="form-control" disabled />
+            </div>
 
-        <div class="col-2 pt-3">
-            <label asp-for="LastName" class="control-label pt-2" style="font-size:20px;"></label>
-        </div>
-        <div class="col-10 pt-3">
-            <input asp-for="LastName" class="form-control" disabled />
-        </div>
+            <div class="col-2 pt-3">
+                <label asp-for="LastName" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pt-3">
+                <input asp-for="LastName" class="form-control" disabled />
+            </div>
+
+            <div class="col-2 pt-3">
+                <label asp-for="Sex" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pt-3">
+                <input asp-for="Sex" class="form-control" disabled />
+            </div>
+
+            <div class="col-2 pt-3">
+                <label asp-for="Email" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pt-3">
+                <input asp-for="Email" class="form-control" disabled />
+            </div>
+
+            <div class="col-2 pt-3">
+                <label asp-for="UserName" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pt-3">
+                <input asp-for="UserName" class="form-control" disabled />
+            </div>
+
+            <div class="col-2 pt-3">
+                <label asp-for="PhoneNumber" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pt-3">
+                <input asp-for="PhoneNumber" class="form-control" disabled />
+            </div>
+
+            <div class="col-2 pt-3">
+                <label asp-for="Birthday" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pt-3">
+                <input asp-for="Birthday.Date" class="form-control" disabled />
+            </div>
+
+            <div class="col-2 pt-3">
+                <label asp-for="department" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pt-3">
+                <input asp-for="department.Name" class="form-control" disabled />
+            </div>
+
+            <div class="col-2 pt-3">
+                <label asp-for="Create_At" class="control-label pt-2" style="font-size:20px;"></label>
+            </div>
+            <div class="col-10 pt-3">
+                <input asp-for="Create_At.Value.Date" class="form-control" disabled />
+            </div>
 
 
-        <div class="col-2 offset-10 pt-3">
-            <a asp-action="Index" asp-controller="Employees" class="btn-outline-primary btn form-control"><i class="bi bi-arrow-return-left"></i>  Back to list employees</a>
+            <div class="col-2 offset-10 pt-3">
+                <a asp-action="Index" asp-controller="Employees" class="btn-outline-primary btn form-control"><i class="bi bi-arrow-return-left"></i> Back to list employees</a>
+            </div>
         </div>
     </div>
 
